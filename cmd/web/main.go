@@ -5,12 +5,19 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/joho/godotenv"
 	"github.com/xuoxod/go-app-template/pkg/config"
 	"github.com/xuoxod/go-app-template/pkg/handlers"
 	"github.com/xuoxod/go-app-template/pkg/render"
 )
+
+// Application configuration
+var app config.AppConfig
+
+var session *scs.SessionManager
 
 func main() {
 	// Load environment variables
@@ -21,8 +28,18 @@ func main() {
 
 	// Get the template cache from appConfg
 
-	// Application configuration
-	var app config.AppConfig
+	// Application mode
+	app.InProduction = false
+
+	// Session middleware
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+
+	// Set the app level session
+	app.Session = session
 
 	tc, err := render.CreateTemplateCache()
 
