@@ -31,12 +31,17 @@ func main() {
 	}
 
 	app.TemplateCache = tc
+	app.UseCache = false
+
+	repo := handlers.NewRepo(&app)
+
+	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
 
 	// Routes
-	http.HandleFunc("/", handlers.Index)
-	http.HandleFunc("/about", handlers.About)
+	http.HandleFunc("/", handlers.Repo.Index)
+	http.HandleFunc("/about", handlers.Repo.About)
 
 	port := os.Getenv("PORT")
 
