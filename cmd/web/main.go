@@ -13,10 +13,12 @@ import (
 )
 
 func main() {
+	// Load environment variables
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
 	// Get the template cache from appConfg
 
 	// Application configuration
