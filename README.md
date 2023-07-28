@@ -1,8 +1,10 @@
 ## GO web application template with template
 
 - Dependencies
-  - go get github.com/joho/godotenv
-  - go get -u github.com/go-chi/chi/v5
+  - github.com/alexedwards/scs/v2 v2.5.1
+  - github.com/go-chi/chi v1.5.4
+  - github.com/joho/godotenv v1.5.1
+  - github.com/justinas/nosurf v1.1.1
 
 ```
 > Golang reference project
