@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/xuoxod/go-app-template/pkg/config"
+	"github.com/xuoxod/go-app-template/pkg/models"
 	"github.com/xuoxod/go-app-template/pkg/render"
 )
 
@@ -28,9 +29,15 @@ func NewHandlers(r *Repository) {
 }
 
 func (m *Repository) Index(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "home.page.tmpl")
+	stringMap := make(map[string]string)
+	stringMap["subheading"] = "Welcome to my awesome Golang web application"
+
+	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{StringMap: stringMap})
 }
 
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "about.page.tmpl")
+	stringMap := make(map[string]string)
+	stringMap["subheading"] = "Who we are is totally and completely irrelevant"
+
+	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{StringMap: stringMap})
 }

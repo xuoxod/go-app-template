@@ -34,14 +34,12 @@ func main() {
 	app.UseCache = true
 
 	repo := handlers.NewRepo(&app)
-
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
 
 	// Routes
-	http.HandleFunc("/", handlers.Repo.Index)
-	http.HandleFunc("/about", handlers.Repo.About)
+	// http.HandleFunc("/", handlers.Repo.Index)
+	// http.HandleFunc("/about", handlers.Repo.About)
 
 	port := os.Getenv("PORT")
 
@@ -51,5 +49,13 @@ func main() {
 
 	fmt.Printf("\n\tServer listening on port %v\n\n", port)
 
-	_ = http.ListenAndServe(":"+port, nil)
+	// _ = http.ListenAndServe(":"+port, nil)
+
+	srv := &http.Server{
+		Addr:    port,
+		Handler: routes(&app),
+	}
+	err = srv.ListenAndServe()
+
+	log.Fatal(err)
 }
