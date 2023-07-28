@@ -1,4 +1,4 @@
-## GO web application template with template
+## GO web application with template system
 
 - Dependencies
   - github.com/alexedwards/scs/v2 v2.5.1
